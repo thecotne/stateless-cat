@@ -1,0 +1,26 @@
+{
+  "plugins": ["sort-imports-es6-autofix"],
+  "extends": ["standard", "standard-react"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "FB": true,
+    "ga": true,
+    "videojs": true
+  },
+  "rules": {
+    "react/no-deprecated": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/no-typos": "error",
+    "react/require-render-return": "error",
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }],
+    "import/newline-after-import": "error"
+  }
+}

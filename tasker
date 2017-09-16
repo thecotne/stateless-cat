@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -e
+
+if [ ! -f ./node_modules/@thecotne/tasker/tasker-core ]; then
+  yarn
+fi
+
+source ./node_modules/@thecotne/tasker/tasker-core
+
+function install { # Install All Dependencies
+  yarn
+}
+
+function update { # Update Project
+  yarn upgrade-interactive --force
+}
+
+function start { # Start Development Server
+  if [[ "$1" = "--production" ]]; then
+    NODE_ENV="production" webpack-dev-server --optimize-minimize --compress
+  else
+    webpack-dev-server
+  fi
+}
+
+function build { # Compile Assets For Production
+  if [[ "$1" = "--production" ]]; then
+    NODE_ENV="production" webpack --optimize-minimize
+  else
+    webpack
+  fi
+}
+
+function unused { # Show redundant/unused files
+  WEBPACK_MOD="show-unused" webpack | sed "1,/UnusedFilesWebpackPlugin/d"
+}
+
+function test { # Run Tests
+  lint
+}
+
+function lint { # Lint Project Files
+  eval "eslint *.js src/js ${@}"
+}
+
+function webpack {
+    eval "command ./node_modules/.bin/webpack ${@}"
+}
+
+function eslint {
+    eval "command ./node_modules/.bin/eslint ${@}"
+}
+
+_bootstrap "${@}"
