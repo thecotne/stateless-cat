@@ -82,6 +82,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.WEBPACK_MOD !== 'show-u
 
   module.exports.plugins.push(
     new WebpackBuildNotifierPlugin({
+      onClick (notifierObject, options) {},
       sound: 'Tink',
       suppressSuccess: true
     })
