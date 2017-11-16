@@ -7,12 +7,17 @@ fi
 
 source ./node_modules/@thecotne/tasker/tasker-core
 
+function info { # Show some informations about environment
+  echo "yarn v$(yarn -v)"
+  echo "node $(node -v)"
+}
+
 function install { # Install All Dependencies
   yarn
 }
 
 function update { # Update Project
-  yarn upgrade-interactive --force
+  yarn upgrade-interactive --force --latest
 }
 
 function start { # Start Development Server
