@@ -6,11 +6,6 @@
     "browser": true,
     "node": true
   },
-  "globals": {
-    "FB": true,
-    "ga": true,
-    "videojs": true
-  },
   "rules": {
     "react/no-deprecated": "error",
     "react/no-direct-mutation-state": "error",
