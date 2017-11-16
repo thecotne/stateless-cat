@@ -8,5 +8,5 @@ require('babel-polyfill')
 //   Raven.config('https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@sentry.io/xxxxxx').install()
 // }
 
-require('js/index')
+require('js/app')
 require('sass/index')

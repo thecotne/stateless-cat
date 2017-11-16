@@ -2,25 +2,11 @@ const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const entry = require('webpack-glob-entry')
-const R = require('ramda')
 
 const abs = str => path.resolve(__dirname, str)
 
-const htmlEntries = R.pipe(
-  R.toPairs,
-  R.map(([name, path]) => (
-    new HtmlWebpackPlugin({
-      title: 'Loading ...',
-      filename: `${name}.html`,
-      chunks: ['commons', name],
-      template: 'src/js/entries/template.ejs'
-    })
-  ))
-)
-
 module.exports = {
-  entry: entry('src/js/entries/*.js'),
+  entry: 'src/js/index.js',
   output: {
     path: abs('public'),
     filename: '[name]-[chunkhash].js',
@@ -71,14 +57,15 @@ module.exports = {
       filename: 'style-[chunkhash].css',
       allChunks: true
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: '[name]-[chunkhash].js'
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Loading ...',
+      filename: 'index.html',
+      template: 'src/js/template.ejs'
     })
   ],
   devServer: {
@@ -89,8 +76,6 @@ module.exports = {
   },
   devtool: false
 }
-
-module.exports.plugins = module.exports.plugins.concat(htmlEntries(module.exports.entry))
 
 if (process.env.NODE_ENV !== 'production' && process.env.WEBPACK_MOD !== 'show-unused') {
   const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
