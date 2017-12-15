@@ -16,6 +16,7 @@
       "ignoreMemberSort": false,
       "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
     }],
-    "import/newline-after-import": "error"
+    "import/newline-after-import": "error",
+    "object-curly-spacing": ["error", "always"]
   }
 }
